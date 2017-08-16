@@ -13,8 +13,6 @@ def get_commits():
     
     donger_commits = []
     dongers = json.loads(r.text.encode('utf-8'))
-    #print type(dongers)
-    #print r.text.encode('utf-8')
     
     for key, value in dongers.iteritems():
         if key == 'items':
@@ -26,7 +24,11 @@ def get_commits():
 @app.route('/')
 def index():
     commit_url = get_commits()
-    return redirect(commit_url, code=302)
+    girth_size = random.uniform(0, 12)
+    girth_size_str = str(girth_size)[:4] + ' inches'
+    response = redirect(commit_url, code=302)
+    response.headers = {'X-Girth-Size': girth_size_str}
+    return response
 
 if __name__ == '__main__':
     print "Girthmode engaged."
