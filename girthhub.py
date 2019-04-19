@@ -27,7 +27,7 @@ def index():
     girth_size = random.uniform(0, 12)
     girth_size_str = str(girth_size)[:4] + ' inches'
     response = redirect(commit_url, code=302)
-    response.headers = {'X-Girth-Size': girth_size_str}
+    response.headers.set('X-Girth-Size', girth_size_str)
     return response
 
 if __name__ == '__main__':
